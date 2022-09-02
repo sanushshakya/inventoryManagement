@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "imventory",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:{port}/api",
+      "variables": {
+        "port": {
+          "default": 5000,
+          "description": "base api url"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "get all categories",
+        "operationId": "getallcategories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successfully fetched all categories",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "add new category",
+        "operationId": "addnewcategory",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categories"
+              },
+              "example": {
+                "category_type": "test category type"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "409": {
+            "description": "category already exists"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/categories/{id}": {
+      "delete": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "delete a category",
+        "operationId": "deleteacategory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "409": {
+            "description": "category doesn't exist"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "update a category",
+        "operationId": "updateacategory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categories"
+              },
+              "example": {
+                "category_type": "test category type"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "409": {
+            "description": "category already exists"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "categories": {
+        "title": "categories",
+        "required": [
+          "id",
+          "category_type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "category_type": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": "1",
+          "category_type": "test category"
+        }
+      },
+      "brands": {
+        "title": "brands",
+        "required": [
+          "id",
+          "brand_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "brand_name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": "1",
+          "brand_name": "test brand"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "categories",
+      "description": "item category type"
+    },
+    {
+      "name": "brands",
+      "description": "item brand names"
+    }
+  ]
+}
